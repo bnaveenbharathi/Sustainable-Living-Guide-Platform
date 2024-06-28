@@ -57,6 +57,23 @@ def login():
     return render('login.html')
 
 
+@app.route('/',methods=['GET','POST'])
+def home():
+    if 'email' in session:
+        email=session['email']
+        detail=db.fetch_all_detail(email)
+        return render('index.html',info=detail,name=appname)
+    else:
+        return redirect(url_for('login'))
+    
+@app.route('/settings',methods=["GET","POST"])
+def settings():
+    if 'email' in session:
+        email=session['email']
+        detail=db.fetch_all_detail(email)
+        return render('settings.html',info=detail,name=appname)
+    else:
+        return redirect(url_for('login'))
 # logout
 @app.route('/logout')
 def logout():

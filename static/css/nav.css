@@ -1,0 +1,77 @@
+@import url("/static/css/color.css");
+
+a{
+    text-decoration: none !important;
+   
+}
+.centercenter{
+    width: 100%;
+    max-width: 980px;
+    margin: 0 auto;
+}
+.justifycenter{
+    display: flex;
+    justify-content: center;
+}
+.nav{
+    background: var(--hover-color);
+    border-bottom: 2px solid var(  --border-color);
+ box-shadow: 0px 2px 2px rgba(0,0,0,0.3);
+}
+nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+nav ul li {
+    display: inline-block;
+    flex-direction: row;
+    padding: 10px;
+}
+nav h3{
+    padding: 10px;
+    color: var();
+}
+nav ul li a{
+ color: var(--primary-color) !important;
+ font-weight: 500;
+ position: relative;
+ 
+}
+nav ul li a::after{
+    content: '';
+    position: absolute;
+    bottom: -13%;
+    left: 0;
+    width: 0;
+    background: var(--border-color);
+    height: 3px;
+    transition: 0.5s;
+}
+nav ul li a:hover::after{
+    width: 100%;
+}
+.logo{
+    display: flex;
+    justify-content: center;
+    padding: 8px;
+}
+footer{
+    border-top:2px solid var(  --border-color); ;
+    background: var(--hover-color);
+}
+button{
+    outline: none !important;
+}
+.content{
+    background: #f6f6f6;
+}
+ @media (max-width: 480px) {
+    .logo img{
+      max-height: 40px;
+    }
+    nav {
+       flex-direction: column;
+    }
+}

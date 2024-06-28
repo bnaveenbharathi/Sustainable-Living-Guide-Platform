@@ -1,0 +1,95 @@
+<title>{{name}}</title>
+<link rel="stylesheet" href="{{url_for('static',filename='css/home.css')}}">
+{% extends 'base.html' %}
+
+{% block content %}
+
+<main class=" mt-1 mb-3">
+    <div class="main-section">
+ </div>
+ <div class="sectioncontent text-center">
+    <h2>Welcome to EcoX</h2>
+    <div class="line"></div>
+    <h3>Join us on the journey to a more sustainable future!</h3>
+    <a href="#features"><button>Explore</button></a>
+</div>
+</main>
+<section class="why-section ">
+    <div class="section-content">
+        <h2 class="section-title">Why EcoX?</h2>
+        <div class="line1"></div>
+        <p>EcoX is your personalized guide to sustainable living. Our platform provides you with actionable tips, local resources, and community support to help you reduce your environmental footprint.</p>
+        <h3 class="section-subtitle">Special Features</h3>
+        <ul class="feature-list">
+            <li>Personalized tips and recommendations based on your lifestyle and habits.</li>
+            <li>Interactive dashboard to track and visualize your environmental impact.</li>
+            <li>Local resources and events to support sustainable living in your area.</li>
+            <li>Community forum for sharing tips, experiences, and ideas.</li>
+        </ul>
+    </div>
+</section>
+
+<section class="features" id="features">
+    <div class="features-section">
+        <h2 class="section-title">Discover {{name}} Features</h2>
+        <div class="feature-card">
+            <div class="feature-content">
+              
+                <div class="feature-text">
+                    <h3>Personalized Tips</h3>
+                    <p>Receive tailored recommendations to enhance your sustainable lifestyle. Our platform analyzes your preferences and habits to deliver actionable tips that fit your unique needs. Whether you're interested in energy efficiency, waste reduction, or sustainable consumption, we provide practical advice to help you make a positive impact on the environment.</p>                   
+                     <a href=""> <button>Uncover</button></a>
+                </div>
+                <div class="feature-img">
+                    <img src="/static/img/personalized-tips.jpg" alt="Personalized Tips Image">
+                </div>
+            </div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-content">
+                <div class="feature-img">
+                    <img src="/static/img/local-resources.jpg" alt="Local Resources Image">
+                </div>
+                <div class="feature-text">
+                    <h3>Local Resources</h3>
+                    <p>Discover nearby resources that support your journey towards sustainability. Find recycling centers, composting facilities, eco-friendly stores, and community initiatives in your area. Access valuable information to make informed choices and contribute to a greener environment right where you live.</p>
+                    <a href=""> <button>Uncover</button></a>
+
+                </div>
+            </div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-content">
+              
+                <div class="feature-text">
+                    <h3>Community Engagement</h3>
+                    <p>Engage with your local community and participate in events, workshops, and forums dedicated to sustainability. Connect with like-minded individuals and organizations to share ideas, learn from others, and collaborate on initiatives that make a positive impact on the environment.</p>
+                    <a href=""> <button>Uncover</button></a>
+
+                </div>
+
+                <div class="feature-img">
+                    <img src="/static/img/community-engagement.jpg" alt="Community Engagement Image">
+                </div>
+            </div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-content">
+                <div class="feature-img">
+                    <img src="/static/img/progress-tracker.jpg" alt="Progress Tracker Image">
+                </div>
+                <div class="feature-text">
+                    <h3>Progress Tracker</h3>
+                    <p>Track and monitor your journey towards sustainability with our intuitive progress tracker. Set goals, record your achievements, and visualize your impact on reducing your carbon footprint. Stay motivated and informed as you take steps to create a more sustainable lifestyle.</p>
+                    <a href=""> <button>Uncover</button></a>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+</section>
+
+
+{% endblock %}
