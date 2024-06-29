@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Information Insert | {{name}}</title>
+  <link rel="stylesheet" href="{{url_for('static',filename='css/personalinfoinsert.css')}}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header >
+     <div class="center">
+        <h2>{{name}}</h2>
+        <img src="{{url_for('static',filename='img/icon.png')}}" alt="">
+     </div>
+    </header>
+<div class="section">
+    <div class="contentsection">
+       <div class="center">
+        <h1 class="">User Questionnaire</h1>
+       </div>
+        <form action="" method="post">
+            <h2>General Information:</h2>
+            <label for="name">Email *</label>
+            <input type="text" id="email" name="email" required >
+
+            <label for="occupation">What is your occupation? *</label>
+            <input type="text" id="occupation" name="occupation" required >
+
+            <h2>Lifestyle and Habits:</h2>
+            <label for="lifestyle">How would you describe your current lifestyle?</label>
+            <select id="lifestyle" name="lifestyle">
+                <option value="urban">Urban</option>
+                <option value="suburban">Suburban</option>
+                <option value="rural">Rural</option>
+            </select>
+
+            <label for="residence">Do you live in a house, apartment, or other type of residence?</label>
+            <input type="text" id="residence" name="residence" >
+
+            <label for="household_size">How many people live in your household?</label>
+            <input type="number" id="household_size" name="household_size" >
+
+            <label for="home_ownership">Do you own or rent your home?</label>
+            <select id="home_ownership" name="home_ownership">
+                <option value="own">Own</option>
+                <option value="rent">Rent</option>
+            </select>
+
+            <label for="garden">Do you have access to a garden or outdoor space?</label>
+            <select id="garden" name="garden">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <h2>Transportation:</h2>
+            <label for="transport_mode">What is your primary mode of transportation?</label>
+            <select id="transport_mode" name="transport_mode">
+                <option value="car">Car</option>
+                <option value="public_transport">Public Transport</option>
+                <option value="bike">Bike</option>
+                <option value="walking">Walking</option>
+            </select>
+
+            <label for="transport_frequency">How often do you use your primary mode of transportation?</label>
+            <select id="transport_frequency" name="transport_frequency">
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="occasionally">Occasionally</option>
+            </select>
+
+            <label for="sustainable_transport">Are you interested in exploring more sustainable transportation options?</label>
+            <select id="sustainable_transport" name="sustainable_transport">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <h2>Energy and Water Usage:</h2>
+            <label for="home_heating">How do you heat your home?</label>
+            <select id="home_heating" name="home_heating">
+                <option value="gas">Gas</option>
+                <option value="electric">Electric</option>
+                <option value="oil">Oil</option>
+                <option value="renewable">Renewable Energy</option>
+            </select>
+
+            <label for="energy_reduction">Do you actively try to reduce your energy consumption?</label>
+            <select id="energy_reduction" name="energy_reduction">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <label for="water_usage">How do you primarily use water in your home?</label>
+            <input type="text" id="water_usage" name="water_usage" >
+
+            <label for="water_reduction_interest">Are you interested in learning ways to reduce your water usage?</label>
+            <select id="water_reduction_interest" name="water_reduction_interest">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <h2>Food and Diet:</h2>
+            <label for="cook_frequency">How often do you cook at home?</label>
+            <select id="cook_frequency" name="cook_frequency">
+                <option value="daily">Daily</option>
+                <option value="few_times_week">A few times a week</option>
+                <option value="rarely">Rarely</option>
+            </select>
+
+            <label for="local_organic_food">Do you try to buy local or organic food?</label>
+            <select id="local_organic_food" name="local_organic_food">
+                <option value="always">Always</option>
+                <option value="sometimes">Sometimes</option>
+                <option value="rarely">Rarely</option>
+            </select>
+
+            <label for="diet_restrictions">Are you vegetarian, vegan, or do you follow any specific dietary restrictions?</label>
+            <input type="text" id="diet_restrictions" name="diet_restrictions" >
+
+            <label for="food_waste_interest">Are you interested in reducing food waste?</label>
+            <select id="food_waste_interest" name="food_waste_interest">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <h2>Waste Management:</h2>
+            <label for="recycle_frequency">Do you currently recycle?</label>
+            <select id="recycle_frequency" name="recycle_frequency">
+                <option value="always">Always</option>
+                <option value="sometimes">Sometimes</option>
+                <option value="rarely">Rarely</option>
+            </select>
+
+            <label for="recycle_materials">What types of materials do you recycle?</label>
+            <input type="text" id="recycle_materials" name="recycle_materials" >
+
+            <label for="composting_interest">Are you interested in learning more about composting?</label>
+            <select id="composting_interest" name="composting_interest">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <h2>Shopping and Consumption:</h2>
+            <label for="clothing_purchase_frequency">How often do you purchase new clothing?</label>
+            <select id="clothing_purchase_frequency" name="clothing_purchase_frequency">
+                <option value="monthly">Monthly</option>
+                <option value="quarterly">Quarterly</option>
+                <option value="rarely">Rarely</option>
+            </select>
+
+            <label for="purchase_impact">Do you consider the environmental impact of your purchases?</label>
+            <select id="purchase_impact" name="purchase_impact">
+                <option value="always">Always</option>
+                <option value="sometimes">Sometimes</option>
+                <option value="rarely">Rarely</option>
+            </select>
+
+            <label for="sustainable_brands_interest">Are you interested in learning about sustainable brands and products?</label>
+            <select id="sustainable_brands_interest" name="sustainable_brands_interest">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <h2>Personal Goals:</h2>
+            <label for="sustainability_reasons">What are your main reasons for wanting to live more sustainably?</label>
+            <input type="text" id="sustainability_reasons" name="sustainability_reasons" >
+
+            <label for="sustainability_interests">What areas of sustainability are you most interested in?</label>
+            <select id="sustainability_interests" name="sustainability_interests">
+                <option value="Renewable Energy">Renewable Energy</option>
+                <option value="Waste Management">Waste Management</option>
+                <option value="Water Conservation">Water Conservation</option>
+                <option value="Sustainable Agriculture">Sustainable Agriculture</option>
+                <option value="Climate Change Mitigation">Climate Change Mitigation</option>
+            </select>
+
+            <label for="sustainability_challenges">Are there specific challenges you face in trying to live more sustainably?</label>
+            <input type="text" id="sustainability_challenges" name="sustainability_challenges" >
+
+            <h2>Community Engagement:</h2>
+            <label for="local_events_interest">Are you interested in participating in local sustainability events or workshops?</label>
+            <select id="local_events_interest" name="local_events_interest">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <label for="community_forum_interest">Would you like to join a community forum to share tips and experiences with others?</label>
+            <select id="community_forum_interest" name="community_forum_interest">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <h2>Feedback and Preferences:</h2>
+            <label for="tips_preference">How would you prefer to receive tips and advice?</label>
+            <select id="tips_preference" name="tips_preference">
+                <option value="email">Email</option>
+                <option value="app_notifications">App Notifications</option>
+                <option value="website_updates">Website Updates</option>
+            </select>
+
+            <label for="platform_feedback">Do you have any suggestions or feedback for us to improve our platform?</label>
+            <input type="text" id="platform_feedback" name="platform_feedback">
+           
+                <button type="submit">Save</button>
+            </form>
+
+           
+            
+        
+            <div class="buttonsec mt-3">
+            <a href="{{url_for('login')}}"><button >Skip</button></a>
+        </div>
+        
+    </div>
+    </div>
+
+</body>
+</html>

@@ -104,15 +104,18 @@ db = Database(mysql)
 def signup():
     if request.method == 'POST':
         email = request.form["email"]
+        name = request.form["name"]
+        age_group= request.form["age_group"]
         password = request.form["password"]
         hashpassword = bcrypt.generate_password_hash(password).decode('utf-8')
         con = mysql.connection.cursor()
-        sql = "INSERT INTO users (email, password) VALUES (%s, %s)"
-        con.execute(sql, (email, hashpassword))
+        sql = "INSERT INTO users (email, password,name,age_group) VALUES (%s, %s,%s,%s)"
+        con.execute(sql, (email, hashpassword,name,age_group))
         mysql.connection.commit()
         con.close()
-        return redirect(url_for('login'))
+        return redirect(url_for('personalinfoinsert'))
     return render('signup.html')
+
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
@@ -197,8 +200,8 @@ def carboncalculator():
     else:
         return redirect(url_for('login'))
 
-@app.route('/personalinfo', methods=["GET", "POST"])
-def personalinfo():
+@app.route('/personalinfoupdate', methods=["GET", "POST"])
+def personalinfoupdate():
     if 'email' in session:
         email = session["email"]
         detail = db.fetch_all_detail(email)
@@ -239,6 +242,82 @@ def personalinfo():
         return render('infoprofile.html', name=appname, info=detail)
     else:
         return redirect(url_for('login'))
+@app.route('/personalinfo')
+def personalinfo():
+    if 'email' in session:
+        email = session['email']
+        details = db.fetch_all_detail(email)
+        return render('infoprofileread.html', name=appname, info=details)
+    else:
+        return redirect(url_for('login'))
+
+@app.route('/personalinfoinsert', methods=["GET", "POST"])
+def personalinfoinsert():
+    if request.method == 'POST':
+        email = request.form['email']
+        occupation = request.form['occupation']
+        lifestyle = request.form['lifestyle']
+        residence = request.form['residence']
+        household_size = request.form['household_size']
+        home_ownership = request.form['home_ownership']
+        garden_access = request.form['garden']
+        transport_mode = request.form['transport_mode']
+        transport_frequency = request.form['transport_frequency']
+        sustainable_transport = request.form['sustainable_transport']
+        home_heating = request.form['home_heating']
+        energy_reduction = request.form['energy_reduction']
+        water_usage = request.form['water_usage']
+        water_reduction_interest = request.form['water_reduction_interest']
+        cook_frequency = request.form['cook_frequency']
+        local_organic_food = request.form['local_organic_food']
+        diet_restrictions = request.form['diet_restrictions']
+        food_waste_interest = request.form['food_waste_interest']
+        recycle_frequency = request.form['recycle_frequency']
+        recycle_materials = request.form['recycle_materials']
+        composting_interest = request.form['composting_interest']
+        clothing_purchase_frequency = request.form['clothing_purchase_frequency']
+        purchase_impact = request.form['purchase_impact']
+        sustainable_brands_interest = request.form['sustainable_brands_interest']
+        sustainability_reasons = request.form['sustainability_reasons']
+        sustainability_interests = request.form['sustainability_interests']
+        sustainability_challenges = request.form['sustainability_challenges']
+        local_events_interest = request.form['local_events_interest']
+        community_forum_interest = request.form['community_forum_interest']
+        tips_preference = request.form['tips_preference']
+        platform_feedback = request.form['platform_feedback']
+
+        con = mysql.connection.cursor()
+        update_sql = """
+                UPDATE users SET occupation = %s, lifestyle = %s, residence = %s, household_size = %s, 
+                home_ownership = %s,garden_access = %s, transport_mode = %s, transport_frequency = %s, 
+                sustainable_transport = %s, home_heating = %s, energy_reduction = %s, water_usage = %s, 
+                water_reduction_interest = %s, cook_frequency = %s, local_organic_food = %s, diet_restrictions = %s, 
+                food_waste_interest = %s, recycle_frequency = %s, recycle_materials = %s, composting_interest = %s, 
+                clothing_purchase_frequency = %s, purchase_impact = %s, sustainable_brands_interest = %s, 
+                sustainability_reasons = %s, sustainability_interests = %s, sustainability_challenges = %s, 
+                local_events_interest = %s, community_forum_interest = %s, tips_preference = %s, platform_feedback = %s 
+                WHERE email = %s
+            """
+        update_data = (occupation, lifestyle, residence, household_size, home_ownership,
+                           garden_access, transport_mode, transport_frequency, sustainable_transport,
+                           home_heating, energy_reduction, water_usage, water_reduction_interest,
+                           cook_frequency, local_organic_food, diet_restrictions, food_waste_interest,
+                           recycle_frequency, recycle_materials, composting_interest,
+                           clothing_purchase_frequency, purchase_impact, sustainable_brands_interest,
+                           sustainability_reasons, sustainability_interests, sustainability_challenges,
+                           local_events_interest, community_forum_interest, tips_preference, platform_feedback, email)
+            
+        con.execute(update_sql, update_data)
+        
+        
+        mysql.connection.commit()
+        con.close()
+        
+        return redirect(url_for('login'))
+    else:
+        return render('infoprofileinsert.html', name=appname)
+
+    
 
 @app.route('/deleteinfor')
 def deleteinfo():
