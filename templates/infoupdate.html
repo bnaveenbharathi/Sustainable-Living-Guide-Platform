@@ -1,6 +1,8 @@
 <title>Settings | {{name}}</title>
 <link rel="stylesheet" href="{{url_for('static',filename='css/settings.css')}}">
+<style>
 
+</style>
 
 {% extends 'base.html' %}
 
@@ -18,7 +20,8 @@
 
         </aside>
         <div class="account-contain">
-            <h1>Account Settings</h1>
+            <h1>Update Settings</h1>
+            <form action="" method="post">
             <section id="profile-info">
                 <ol class="head">
                     <li><h2>Profile Information</h2></li>
@@ -26,15 +29,15 @@
                 <table class="mt-2">
                     <tr>
                         <td><label for="name">Name:</label></td>
-                        <td><input type="text" id="name" name="name" value="{{info.name}}" readonly></td>
+                        <td><input type="text" id="name" name="name" value="{{info.name}}"></td>
                     </tr>
                     <tr>
                         <td><label for="age-group">Age Group:</label></td>
-                        <td><input type="text" id="age-group" name="age-group" value="{{info.age_group}}" readonly></td>
+                        <td><input type="text" id="age-group" name="age-group" value="{{info.age_group}}"></td>
                     </tr>
                     <tr>
                         <td><label for="occupation">Occupation:</label></td>
-                        <td><input type="text" id="occupation" name="occupation" value="{{info.occupation}}" readonly></td>
+                        <td><input type="text" id="occupation" name="occupation" value="{{info.occupation}}"></td>
                     </tr>
                 </table>
             </section>
@@ -46,16 +49,28 @@
                 <table class="mt-2 mb-2">
                     <tr class="tabrow">
                         <td><label for="email">Email:</label></td>
-                        <td><input type="text" id="email" name="email" value="{{info.email}}" readonly></td>
+                        <td><input type="text" id="email" name="email" value="{{info.email}}"></td>
+                    </tr>
+                </table>
+            </section>
+            <section id="email-preferences">
+                <ol class="head">
+                    <li><h2>Password Preferences</h2></li>
+                </ol>
+                <table class="mt-2 mb-2">
+                    <tr class="tabrow">
+                        <td><label for="email">Password:</label></td>
+                        <td><input type="text" id="password" name="password" value="" placeholder="Enter Your New Password" style="width: 110%;"></td>
                     </tr>
                 </table>
             </section>
     
             <br>
           <div class="actionsection">
-            <a href="{{url_for('updateinfo')}}"><button type="submit">Update</button></a>
+            <a href=""><button type="submit">Update</button></a>
           </div>
         </div>
+    </form>
 </div>
 
 

@@ -74,6 +74,30 @@ def settings():
         return render('settings.html',info=detail,name=appname)
     else:
         return redirect(url_for('login'))
+    
+@app.route('/update-info',methods=["GET","POST"])
+def updateinfo():
+    if 'email' in session:
+        email=session['email']
+        detail=db.fetch_all_detail(email)
+        if request.method=="POST":
+            name=request.form["name"]
+            agegroup=request.form['age-group']
+            occupation=request.form['occupation']
+            new_email=request.form['email']
+            password=request.form['password']
+            hashedpassword=bcrypt.generate_password_hash(password).decode('utf-8')
+            con=mysql.connection.cursor()
+            sql = "UPDATE users SET name=%s, age_group=%s, occupation=%s, email=%s, password=%s WHERE email=%s"
+            con.execute(sql, (name, agegroup, occupation, new_email, hashedpassword, email))
+            mysql.connection.commit()
+            session['email']=new_email
+            return redirect(url_for('updateinfo'))
+        return render('infoupdate.html',info=detail,name=appname)
+        
+    else:
+        return redirect(url_for('login'))
+   
 # logout
 @app.route('/logout')
 def logout():

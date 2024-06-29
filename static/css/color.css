@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Raleway:wght@400;700&display=swap');
+
 :root {
     --background-color: #F5F5F5;
     --primary-color: #2C6E49;
@@ -9,4 +11,7 @@
     --border-color: #8B4513;
     --accent-color: #FFA500;
     --hover-color: #D2B48C;
+}
+body{
+   font-family: 'Poppins', sans-serif !important;
 }
