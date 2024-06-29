@@ -1,0 +1,213 @@
+<title>Settings | {{name}}</title>
+
+<link rel="stylesheet" href="{{url_for('static',filename='css/settings.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='css/personalinfo.css')}}">
+
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<main>
+    <div class="grid-container">
+        <aside>
+            <nav>
+                <ol>
+                    <li ><a href="{{url_for('settings')}}">General Settings</a></li>
+                    <li > <a href="{{url_for('personalinfo')}}">Personal Info</a></li>
+                    <li><a href="">Help & Support</a></li>
+                </ol>
+            </nav>
+
+        </aside>
+        <div class="account-contain">
+
+            <section id="infor">
+              
+                    <h2>Important Information !</h2>
+                    <p>Your information is stored securely.if you don't needed <a href="{{url_for('deleteinfo')}}"><button >Click here to delete it.</button></a></p>
+                    <p>This information is used solely to provide personalized tips and track your carbon footprint.</p>
+             </section>
+            </section>
+              <!-- Lifestyle and Habits -->
+               <form action="" method="post">
+              <section id="lifestyle-habits">
+                <h2>Lifestyle and Habits</h2>
+                <table>
+                    <tr>
+                        <td><label for="lifestyle">Lifestyle:</label></td>
+                        <td><input type="text" id="lifestyle" name="lifestyle" value="{{ info.lifestyle }}"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="residence">Residence:</label></td>
+                        <td><input type="text" id="residence" name="residence" value="{{ info.residence }}"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="household_size">Household Size:</label></td>
+                        <td><input type="text" id="household_size" name="household_size" value="{{ info.household_size }}"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="home_ownership">Home Ownership:</label></td>
+                        <td><input type="text" id="home_ownership" name="home_ownership" value="{{ info.home_ownership }}"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="garden_access">Garden Access:</label></td>
+                        <td><input type="text" id="garden_access" name="garden_access" value="{{ info.garden_access }}"></td>
+                    </tr>
+                </table>
+            </section>
+            <!-- Transportation -->
+            <section id="transportation">
+                <h2>Transportation</h2>
+                <table>
+                    <tr>
+                        <td><label for="transport_mode">Primary Mode of Transportation:</label></td>
+                        <td><input type="text" id="transport_mode" name="transport_mode" value="{{ info.transport_mode }}"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="transport_frequency">Transportation Frequency:</label></td>
+                        <td><input type="text" id="transport_frequency" name="transport_frequency" value="{{ info.transport_frequency }}"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="sustainable_transport">Interested in Sustainable Transportation:</label></td>
+                        <td><input type="text" id="sustainable_transport" name="sustainable_transport" value="{{ info.sustainable_transport }}"></td>
+                    </tr>
+                </table>
+            </section>
+            <!-- Energy and Water Usage -->
+            <section id="energy-water-usage">
+                <h2>Energy and Water Usage</h2>
+                <table>
+                    <tr>
+                        <td><label for="home_heating">Home Heating:</label></td>
+                        <td><input type="text" id="home_heating" name="home_heating" value="{{ info.home_heating }}"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="energy_reduction">Energy Reduction Efforts:</label></td>
+                        <td><input type="text" id="energy_reduction" name="energy_reduction" value="{{ info.energy_reduction }}"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="water_usage">Water Usage:</label></td>
+                        <td><input type="text" id="water_usage" name="water_usage" value="{{ info.water_usage }}"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="water_reduction_interest">Interested in Reducing Water Usage:</label></td>
+                        <td><input type="text" id="water_reduction_interest" name="water_reduction_interest" value="{{ info.water_reduction_interest }}"></td>
+                    </tr>
+                </table>
+            </section>
+            <!-- Food and Diet -->
+            <section id="food-diet">
+                <h2>Food and Diet</h2>
+                <table>
+                    <tr>
+                        <td><label for="cook_frequency">Cooking Frequency:</label></td>
+                        <td><input type="text" id="cook_frequency" name="cook_frequency" value="{{ info.cook_frequency }}"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="local_organic_food">Buy Local or Organic Food:</label></td>
+                        <td><input type="text" id="local_organic_food" name="local_organic_food" value="{{ info.local_organic_food }}"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="diet_restrictions">Dietary Restrictions:</label></td>
+                        <td><input type="text" id="diet_restrictions" name="diet_restrictions" value="{{ info.diet_restrictions }}"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="food_waste_interest">Interested in Reducing Food Waste:</label></td>
+                        <td><input type="text" id="food_waste_interest" name="food_waste_interest" value="{{ info.food_waste_interest }}"></td>
+                    </tr>
+                </table>
+            </section>
+            <!-- Waste Management -->
+            <section id="waste-management">
+                <h2>Waste Management</h2>
+                <table>
+                    <tr>
+                        <td><label for="recycle_frequency">Recycling Frequency:</label></td>
+                        <td><input type="text" id="recycle_frequency" name="recycle_frequency" value="{{ info.recycle_frequency }}"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="recycle_materials">Materials Recycled:</label></td>
+                        <td><input type="text" id="recycle_materials" name="recycle_materials" value="{{ info.recycle_materials }}"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="composting_interest">Interested in Composting:</label></td>
+                        <td><input type="text" id="composting_interest" name="composting_interest" value="{{ info.composting_interest }}"></td>
+                    </tr>
+                </table>
+            </section>
+            <!-- Shopping and Consumption -->
+            <section id="shopping-consumption">
+                <h2>Shopping and Consumption</h2>
+                <table>
+                    <tr>
+                        <td><label for="clothing_purchase_frequency">Clothing Purchase Frequency:</label></td>
+                        <td><input type="text" id="clothing_purchase_frequency" name="clothing_purchase_frequency" value="{{ info.clothing_purchase_frequency }}"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="purchase_impact">Consider Environmental Impact:</label></td>
+                        <td><input type="text" id="purchase_impact" name="purchase_impact" value="{{ info.purchase_impact }}"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="sustainable_brands_interest">Interested in Sustainable Brands:</label></td>
+                        <td><input type="text" id="sustainable_brands_interest" name="sustainable_brands_interest" value="{{ info.sustainable_brands_interest }}"></td>
+                    </tr>
+                </table>
+            </section>
+            <!-- Personal Goals -->
+            <section id="personal-goals">
+                <h2>Personal Goals</h2>
+                <table>
+                    <tr>
+                        <td><label for="sustainability_reasons">Reasons for Sustainability:</label></td>
+                        <td><input type="text" id="sustainability_reasons" name="sustainability_reasons" value="{{ info.sustainability_reasons }}"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="sustainability_interests">Areas of Interest:</label></td>
+                        <td><input type="text" id="sustainability_interests" name="sustainability_interests" value="{{ info.sustainability_interests }}"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="sustainability_challenges">Challenges Faced:</label></td>
+                        <td><input type="text" id="sustainability_challenges" name="sustainability_challenges" value="{{ info.sustainability_challenges }}"></td>
+                    </tr>
+                </table>
+            </section>
+            <!-- Community Engagement -->
+            <section id="community-engagement">
+                <h2>Community Engagement</h2>
+                <table>
+                    <tr>
+                        <td><label for="local_events_interest">Interested in Local Events:</label></td>
+                        <td><input type="text" id="local_events_interest" name="local_events_interest" value="{{ info.local_events_interest }}"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="community_forum_interest">Interested in Community Forum:</label></td>
+                        <td><input type="text" id="community_forum_interest" name="community_forum_interest" value="{{ info.community_forum_interest }}"></td>
+                    </tr>
+                </table>
+            </section>
+            <!-- Feedback and Preferences -->
+            <section id="feedback-preferences">
+                <h2>Feedback and Preferences</h2>
+                <table>
+                    <tr>
+                        <td><label for="tips_preference">Preferred Tips Delivery:</label></td>
+                        <td><input type="text" id="tips_preference" name="tips_preference" value="{{ info.tips_preference }}"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="platform_feedback">Platform Feedback:</label></td>
+                        <td><input type="text" id="platform_feedback" name="platform_feedback" value="{{ info.platform_feedback }}"></td>
+                    </tr>
+                </table>
+            </section>
+            <br>
+            <div class="submitbtn">
+                <button id="submitbtn" type="submit">Update</button>
+            </div>
+        </form>
+</div>
+    </div>
+
+</main>
+
+{% endblock %}
