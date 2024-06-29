@@ -116,6 +116,13 @@ def recyclecenters():
     else:
         return redirect(url_for('login'))
 
+@app.route('/carboncalculator')
+def carboncalculator():
+    if 'email' in session:
+        email=session['email']
+        detail=db.fetch_all_detail(email)
+        return render('carbonfootprint.html',name=appname,info=detail)
+    
 
 
 

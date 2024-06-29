@@ -1,0 +1,134 @@
+
+<title>Carbon Footprint Calculator </title>
+<link rel="stylesheet" href="{{url_for('static',filename='css/carbonfootprint.css')}}">
+{% extends 'base.html' %}
+{% block content %}
+
+<section class=" footcontent">
+    <div class="footprint-content ">
+    <!-- 1 -->
+    <h2>Why a Carbon Footprint Calculator?</h2>
+    <p>A Carbon Footprint Calculator helps individuals or organizations estimate the amount of greenhouse gases, primarily carbon dioxide (CO2), emitted directly or indirectly through their daily activities or operations</p>
+   <!-- 2 -->
+    <h2>What a Carbon Footprint Calculator Measures</h2>
+    <p>
+        <ul>
+            <li>
+                <strong>Electricity Usage:</strong> Measures emissions from energy consumption based on regional energy mix and usage patterns.
+            </li>
+            <li>
+                <strong>Gas Usage:</strong> Calculates emissions from natural gas consumption, considering combustion-related CO2 emissions.
+            </li>
+            <li>
+                <strong>Transportation:</strong> Estimates emissions from personal or fleet vehicle usage, factoring in fuel consumption and vehicle efficiency.
+            </li>
+            <li>
+                <strong>Travel:</strong> Evaluates emissions from air travel based on distance flown and aircraft type.
+            </li>
+        </ul>
+    </p>
+    <!-- 3 -->
+     <h2>Use of a Carbon Footprint Calculator</h2>
+     <p>
+        <ul>
+            <li>
+                <strong>Personal Awareness:</strong> It raises awareness about individual or organizational carbon emissions, helping users understand their environmental impact.
+            </li>
+            <li>
+                <strong>Environmental Responsibility:</strong> Encourages responsible consumption habits by quantifying the carbon impact of everyday activities like electricity usage, transportation, and travel.
+            </li>
+            <li>
+                <strong>Goal Setting:</strong> Facilitates goal setting for carbon reduction strategies, aiding in personal or corporate sustainability efforts.
+            </li>
+        </ul>
+     </p>
+    </div>
+</section>
+
+<section class="input-section">
+    <div class="calculator mt-3 mb-5">
+        <h1>Carbon Footprint Calculator</h1>
+        <form id="carbonForm">
+            <label for="electricity">Electricity usage (kWh):</label>
+            <input type="number" id="electricity" name="electricity" min="0" step="any" required>
+            
+            <label for="gas">Natural Gas usage (m³):</label>
+            <input type="number" id="gas" name="gas" min="0" step="any" required>
+            
+            <label for="mileage">Car mileage (km):</label>
+            <input type="number" id="mileage" name="mileage" min="0" step="any" required>
+            
+            <label for="flight">Flight hours:</label>
+            <input type="number" id="flight" name="flight" min="0" step="any" required>
+            
+            <div class="btnaction mt-3 d-flex justify-content-center">
+                <button type="submit">Calculate</button>
+            </div>
+        </form>
+        <div id="result"></div>
+    </div>
+
+</section>
+<script>
+    const electricityEmissionFactor = 0.82; 
+const gasEmissionFactor = 2.93; 
+const mileageEmissionFactor = 0.180;
+const flightEmissionFactor = 190; 
+
+const form = document.getElementById('carbonForm');
+const resultDiv = document.getElementById('result');
+
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const electricity = parseFloat(document.getElementById('electricity').value);
+    const gas = parseFloat(document.getElementById('gas').value);
+    const mileage = parseFloat(document.getElementById('mileage').value);
+    const flight = parseFloat(document.getElementById('flight').value);
+
+    const carbonFootprint = calculateCarbonFootprint(electricity, gas, mileage, flight);
+    displayResult(carbonFootprint);
+});
+
+function calculateCarbonFootprint(electricity, gas, mileage, flight) {
+    const electricityCO2 = electricity * electricityEmissionFactor;
+    const gasCO2 = gas * gasEmissionFactor;
+    const mileageCO2 = mileage * mileageEmissionFactor;
+    const flightCO2 = flight * flightEmissionFactor;
+
+    return electricityCO2 + gasCO2 + mileageCO2 + flightCO2;
+}
+
+function displayResult(footprint) {
+    const resultMessage = `<p>Your estimated carbon footprint is ${footprint.toFixed(2)} kg CO2e per period.</p>`;
+    resultDiv.innerHTML = resultMessage;
+
+    if (footprint > 500) {
+        showHighAlert();
+    } else {
+        hideAlert();
+    }
+}
+
+function showHighAlert() {
+    const alertDiv = document.createElement('div');
+    alertDiv.classList.add('alert');
+    alertDiv.textContent = 'Your carbon footprint is high! Consider reducing your emissions.';
+    
+    const calculatorDiv = document.querySelector('.calculator');
+    calculatorDiv.appendChild(alertDiv);
+}
+
+function hideAlert() {
+    const alertDiv = document.querySelector('.alert');
+    if (alertDiv) {
+        alertDiv.remove();
+    }
+}
+
+</script>
+
+
+{% endblock %}
+
+
