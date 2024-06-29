@@ -1,0 +1,47 @@
+.line{
+    background: var(--primary-color);
+    height: 2px;
+    width: 70px;
+}
+.heading{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+}
+.contentsections{
+    padding: 15px;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+.innercontent{
+    padding: 10px;
+    box-shadow: 0px 2px 3px rgba(0,0,0,0.3);
+    margin: 20px;
+    transition: all 0.5s;
+}
+.innercontent:hover{
+    transform: scale(1.07);
+}
+.innercontent h4{
+    padding: 5px;
+    color: var(--primary-color);
+}
+.innercontent p{
+    color: #7b7a7a;
+    padding: 5px;
+    line-height: 2;
+}
+.readmore{
+    padding: 8px;
+}
+.readmore button{
+ padding: 0px 10px;
+ border: 1px solid var(--primary-color);
+ background: var(--hover-color);
+ transition: 0.4s;
+}
+.readmore button:hover{
+    transform: scale(1.1);
+}

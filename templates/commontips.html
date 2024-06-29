@@ -1,0 +1,40 @@
+<title>Common Tips | {{name}}</title>
+<link rel="stylesheet" href="{{url_for('static',filename='css/commontips.css')}}">
+{% extends 'base.html '%}
+
+{% block content %}
+<div class="articlecontent">
+    <div class="heading ">
+        <h2>Articles</h2>
+        <div class="line"></div>
+    </div>
+<div class="contentsections">
+{% for article in article %}
+<div class="innercontent">
+<h4>{{article.title}}</h4>
+
+<p>{{article.description[:250]+'...'  }}</p>
+
+<div class="readmore">
+    <a href="{{url_for('commontipsarticles',id=article.id)}}"><button>Read More</button></a>
+</div>
+</div>
+{% endfor %}
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

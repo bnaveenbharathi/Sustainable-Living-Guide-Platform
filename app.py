@@ -200,6 +200,36 @@ def carboncalculator():
     else:
         return redirect(url_for('login'))
 
+#tipssection routes
+@app.route('/tips')
+def tipssection():
+    if 'email' in session:
+        email=session['email']
+        detail=db.fetch_all_detail(email)
+        return render('tips.html',name=appname,info=detail)
+    else:
+        return redirect('login')
+@app.route('/commontips')
+def commontips():
+    if 'email' in session:
+        email=session['email']
+        detail=db.fetch_all_detail(email)
+        con=mysql.connection.cursor()
+        sql="SELECT * from articles1 "
+        con.execute(sql)
+        article=con.fetchall()
+        mysql.connection.commit()
+        con.close()
+        return render('commontips.html',name=appname,info=detail,article=article)
+    else:
+        return redirect(url_for('login'))
+@app.route('/articles/<string:id>')
+def commontipsarticles(id):
+    if 'email' in session:
+        email=session['email']
+        detail=db.fetch_all_detail(email)
+        return render('commonarticle.html',name=appname,info=detail)
+
 @app.route('/personalinfoupdate', methods=["GET", "POST"])
 def personalinfoupdate():
     if 'email' in session:

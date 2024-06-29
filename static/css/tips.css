@@ -1,0 +1,31 @@
+.section-1,.section-2{
+ padding: 8px;
+ box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
+ margin:8px;
+}
+.section-1 p{
+    padding: 10px;
+    text-align: justify;
+    color: var(  --border-color);
+}
+.section-1 h2,.section-2 h2{
+    color: var(--primary-color);
+    padding: 6px;
+}
+.acbtn{
+    padding: 10px;
+}
+.acbtn button{
+    border: 1px solid var(--primary-color);
+    background: var( --link-color);
+    border-radius: 2px;
+}
+.line{
+    background: var(--primary-color);
+    height: 2px;
+    width: 70px;
+}
+.sec-content ul li{
+    padding: 4px;
+    color: rgb(61, 61, 61);
+}

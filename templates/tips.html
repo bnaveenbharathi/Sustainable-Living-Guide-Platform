@@ -1,0 +1,39 @@
+<title>Tips | {{name}}</title>
+<link rel="stylesheet" href="{{url_for('static',filename='css/tips.css')}}">
+
+{% extends 'base.html' %}
+{% block content %}
+
+
+    <main class="p-4">
+        <div class="d-flex flex-column align-items-center">
+            <h2>Environmental Conservation Tips</h2>
+            <div class="line"></div>
+        </div>
+        <section class="section-1">
+          <h2> Common Tips </h2>
+          <p>Implementing simple changes in daily routines plays a crucial role in conserving the environment and promoting personal well-being. By adopting eco-friendly habits like reducing energy consumption, minimizing waste, and opting for sustainable practices, individuals can contribute positively to global efforts for a healthier planet and a sustainable future.</p>
+           <div class="acbtn">
+            <a href="{{url_for('commontips')}}"><button>Get Eco Tips</button></a>
+           </div>
+        </section>
+        <section class="section-2">
+            <h2>Personalized Tips</h2>
+            <div class="sec-content">
+                <ul>
+                    <li><strong>Tailored Advice: </strong>Personalized tips provide actionable advice aligned with individual lifestyles, preferences, and environmental goals.</li>
+                    <li><strong>Recommendations: </strong>They cover energy-saving practices, sustainable transportation, waste reduction, mindful eating, and eco-friendly consumer habits.</li>
+                    <li><strong>Education and Inspiration:</strong>These tips educate and inspire users to adopt greener practices, empowering them to effect meaningful changes.</li>
+
+                </ul>
+                <div class="acbtn">
+                    <button>Get Personalized Tips</button>
+                   </div>
+            </div>
+        </section>
+    </main>
+
+
+
+</div>
+{% endblock %}
