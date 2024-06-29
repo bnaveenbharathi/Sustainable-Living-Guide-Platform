@@ -97,7 +97,28 @@ def updateinfo():
         
     else:
         return redirect(url_for('login'))
-   
+
+@app.route('/recycle_centers', methods=["GET", "POST"])
+def recyclecenters():
+    if 'email' in session:
+        email = session['email']
+        detail = db.fetch_all_detail(email)
+        if request.method == "POST":
+            city = request.form["city"]
+            zip_code = request.form["postal_code"]
+            con = mysql.connection.cursor()
+            sql = "SELECT * FROM recycling_centers WHERE city = %s OR zip_code = %s"
+            con.execute(sql, (city, zip_code))
+            centers = con.fetchall()
+            con.close()
+            return render('recyclingcenters.html',info=detail,name=appname, centers=centers)
+        return render('recyclingcenters.html',info=detail,name=appname) 
+    else:
+        return redirect(url_for('login'))
+
+
+
+
 # logout
 @app.route('/logout')
 def logout():

@@ -1,0 +1,65 @@
+<title>Recycle Centers | {{ name }}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/recyclecenter.css') }}">
+
+{% extends 'base.html' %}
+
+{% block content %}
+<main>
+    <section class="title-section">
+        <h2>Recycling Centers</h2>
+        <div class="line"></div>
+    </section>
+    <section class="content-section">
+        <h3>What are Recycling Centers?</h3>
+        <p>Recycling centers are pivotal facilities where various recyclable materials such as paper, plastics, metals, and electronics are gathered, sorted, and prepared for reuse or repurposing. These centers act as crucial hubs in the recycling process, ensuring that materials are properly handled to maximize their potential for sustainability.</p>
+        <h3>Why are Recycling Centers Important?</h3>
+        <p>Recycling centers play a critical role in our journey towards a sustainable future by significantly reducing waste and conserving valuable resources. By collecting and processing recyclable materials, these centers help divert tons of waste from landfills annually, thereby lessening environmental impact and minimizing the need for new raw materials.</p>
+        <h3>The Use and Benefits of Recycling Centers:</h3>
+        <ul>
+            <li><p><strong>Energy Conservation:</strong> Recycling centers save energy by reusing existing materials effectively.</p></li>
+            <li><p><strong>Emission Reduction:</strong> They cut greenhouse gas emissions by reducing resource extraction.</p></li>
+            <li><p><strong>Economic and Environmental Benefits:</strong> They create jobs and promote sustainability for cleaner environments.</p></li>
+        </ul>
+    </section>
+    <section class="search-centers mt-3">
+        <div class="head">
+            <h2>Find Nearest Recycling Centers</h2>
+        </div>
+        <div class="search mt-4">
+            <form action="" method="POST">
+                <table>
+                    <tr>
+                        <td><label for="city">City:</label></td>
+                        <td><input type="text" id="city" name="city" required></td>
+                        <td><label for="postal_code">Postal Code:</label></td>
+                        <td><input type="text" id="postal_code" name="postal_code" required></td>
+                        <td><input type="submit" value="Search" class="ml-3"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div class="result">
+            {% if centers %}
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Contact Info</th>
+                        <th>Accepted Materials</th>
+                    </tr>
+                    {% for center in centers[:4] %}
+                    <tr>
+                        <td>{{ center.name }}</td>
+                        <td>{{ center.address }}</td>
+                        <td>{{ center.contact_info }}</td>
+                        <td>{{ center.accepted_materials }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p>No recycling centers found!</p>
+            {% endif %}
+        </div>
+    </section>
+</main>
+{% endblock %}
