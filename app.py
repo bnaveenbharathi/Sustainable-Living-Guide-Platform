@@ -199,6 +199,7 @@ def carboncalculator():
         return render('carbonfootprint.html', name=appname, info=detail)
     else:
         return redirect(url_for('login'))
+    
 
 #tipssection routes
 @app.route('/tips')
@@ -242,13 +243,9 @@ def personalized_tips():
         email = session['email']
         detail=db.fetch_all_detail(email)
         con = mysql.connection.cursor()
-        
-        # Fetch user details
         sql = "SELECT * FROM users WHERE email = %s"
         con.execute(sql, (email,))
         user = con.fetchone()
-
-        # Fetch articles based on user preferences
         preferences = [
             ('energy_reduction', user['energy_reduction']),
             ('sustainable_transport', user['sustainable_transport']),
@@ -297,13 +294,9 @@ def personalized_tips_article(id):
         email = session['email']
         detail=db.fetch_all_detail(email)
         con = mysql.connection.cursor()
-        
-        # Fetch user details
         sql = "SELECT * FROM users WHERE email = %s"
         con.execute(sql, (email,))
         user = con.fetchone()
-
-        # Fetch articles based on user preferences
         preferences = [
             ('energy_reduction', user['energy_reduction']),
             ('sustainable_transport', user['sustainable_transport']),
@@ -344,7 +337,14 @@ def personalized_tips_article(id):
     else:
         return redirect(url_for('login'))
 
-
+@app.route('/localresources')
+def localresources():
+    if 'email' in session:
+        email=session['email']
+        detail=db.fetch_all_detail(email)
+        return render('localresources.html',name=appname,info=detail)
+    else:
+        return redirect('login')
 @app.route('/personalinfoupdate', methods=["GET", "POST"])
 def personalinfoupdate():
     if 'email' in session:
@@ -509,8 +509,108 @@ def deleteinfo():
         con.close()
     return redirect(url_for('personalinfo'))
 
+#community section
 
-    
+@app.route('/viewcommuntiy')
+def viewcommunity():
+    if 'email' in session:
+        email=session['email']
+        detail=db.fetch_all_detail(email)
+        con=mysql.connection.cursor()
+        sql1="SELECT * FROM ideas ORDER BY created_at DESC"
+        con.execute(sql1)
+        ideas=con.fetchall()
+        sql2="SELECT * FROM events ORDER BY created_at DESC"
+        con.execute(sql2)
+        events=con.fetchall()
+        sql3="SELECT * from eco_incidents ORDER BY date_posted DESC"
+        con.execute(sql3)
+        eco_incidents=con.fetchall()
+        mysql.connection.commit()
+        con.close()
+        return render('community.html',name=appname,info=detail,ideas=ideas,events=events,incidents=eco_incidents)
+    else:
+        return redirect(url_for('login'))
+
+@app.route('/sharetocommunity',methods=['GET',"POST"])
+def sharetocommunity():
+    if 'email' in session:
+        email=session['email']
+        detail=db.fetch_all_detail(email)
+        return render('communityinsert.html',name=appname,info=detail)
+    else:
+        return redirect(url_for('login'))
+
+@app.route('/eventinsert',methods=["GET",'POST'])
+def eventinsert():
+    if 'email' in session:
+        email=session['email']
+        detail=db.fetch_all_detail(email)
+        if request.method == "POST":
+            title = request.form['title']
+            description = request.form['description']
+            event_type = request.form.get('event_type')
+            event_start = request.form.get('event_start')
+            event_end = request.form.get('event_end')
+            location = request.form['location']
+            user_id = detail['id']
+            user_name = detail['name']
+            con=mysql.connection.cursor()
+            sql = """INSERT INTO events (user_id, title, description, event_type, event_start, event_end, location, created_at,user_name)
+                     VALUES (%s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP,%s)"""
+            con.execute(sql, (user_id, title, description, event_type, event_start, event_end, location,user_name))
+            mysql.connection.commit()
+            con.close()
+        return render('communityinsert.html',name=appname,info=detail)
+    else:
+        return redirect(url_for('sharetocommunity'))
+
+@app.route('/incidentinsert',methods=["GET","POST"])
+def incidenetinsert():
+    if 'email' in session:
+        email=session['email']
+        detail=db.fetch_all_detail(email)
+        if request.method=="POST":
+            title = request.form['title']
+            description = request.form['description']
+            location = request.form['location']
+            media_url = request.form['media_url']
+            user_id = detail['id']
+            user_name = detail['name']
+            con=mysql.connection.cursor()
+            sql = """INSERT INTO eco_incidents (user_id, title, description, location, media_url,user_name)
+                     VALUES (%s, %s, %s, %s, %s,%s)"""
+            con.execute(sql, (user_id, title, description, location, media_url,user_name))
+            mysql.connection.commit()
+            con.close()
+        return render('communityinsert.html',name=appname,info=detail)
+    else:
+        return redirect(url_for('sharetocommunity'))
+
+@app.route('/ideainsert',methods=["GET","POST"])
+def ideainsert():
+    if 'email' in session:
+        email=session['email']
+        detail=db.fetch_all_detail(email)
+        if request.method=="POST":
+            title = request.form['title']
+            description = request.form['description']
+            category = request.form['category']
+            status = request.form['status']
+            user_id = detail['id']
+            user_name = detail['name']
+            con=mysql.connection.cursor()
+            sql = """INSERT INTO ideas (user_id, title, description, status,category,user_name)
+                     VALUES (%s, %s, %s, %s,%s,%s)"""
+            con.execute(sql, (user_id, title, description, status, category,user_name))
+            mysql.connection.commit()
+            con.close()
+        return render('communityinsert.html',name=appname,info=detail)
+    else:
+        return redirect(url_for('sharetocommunity'))
+
+
+
 @app.route('/logout')
 def logout():
     session.pop('loggedin', None)

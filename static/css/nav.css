@@ -60,6 +60,7 @@ nav ul li a:hover::after{
 footer{
     border-top:2px solid var(  --border-color); ;
     background: var(--hover-color);
+    
 }
 button{
     outline: none !important;

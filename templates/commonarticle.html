@@ -10,10 +10,18 @@
     line-height: 2;
     color: #454545;
 }
-textarea{
-    border: none !important;
-    outline:  none !important;
+.in-content button{
+    padding: 3px 10px;
+   border: 1px solid var(--primary-color);
+   border-radius: 3px;
+   color: black;
+   background: var(  --secondary-color);
+   transition: 0.3s;
 }
+.in-content button:hover{
+    transform: scale(1.05);
+}
+
 </style>
 {% extends 'base.html' %}
 {% block content %}
@@ -28,6 +36,9 @@ textarea{
     </div>
     <div class="ar-content">
      {{article.content | safe}}    
+    </div>
+    <div class="in-content">
+        <a href="{{url_for('commontips')}}"><button>Back</button></a>
     </div>
 </div>
 

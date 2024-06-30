@@ -1,4 +1,4 @@
-<title>{{name}}</title>
+<title>{{name}} | Home </title>
 <link rel="stylesheet" href="{{url_for('static',filename='css/home.css')}}">
 {% extends 'base.html' %}
 
@@ -52,8 +52,8 @@
                 </div>
                 <div class="feature-text">
                     <h3>Local Resources</h3>
-                    <p>Discover nearby resources that support your journey towards sustainability. Find recycling centers, composting facilities, eco-friendly stores, and community initiatives in your area. Access valuable information to make informed choices and contribute to a greener environment right where you live.</p>
-                    <a href=""> <button>Uncover</button></a>
+                    <p>Discover nearby resources that support your journey towards sustainability. Find recycling centers, composting facilities, and community initiatives in your area. Access valuable information to make informed choices and contribute to a greener environment right where you live.</p>
+                    <a href="{{url_for('localresources')}}"> <button>Uncover</button></a>
 
                 </div>
             </div>
@@ -64,7 +64,7 @@
                 <div class="feature-text">
                     <h3>Community Engagement</h3>
                     <p>Engage with your local community and participate in events, workshops, and forums dedicated to sustainability. Connect with like-minded individuals and organizations to share ideas, learn from others, and collaborate on initiatives that make a positive impact on the environment.</p>
-                    <a href=""> <button>Uncover</button></a>
+                    <a href="{{url_for('viewcommunity')}}"> <button>Uncover</button></a>
 
                 </div>
 
