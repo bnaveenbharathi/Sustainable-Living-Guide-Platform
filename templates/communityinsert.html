@@ -1,0 +1,143 @@
+<title>Share to Community | {{ name}}</title>
+<style>
+    .main-section{
+        padding: 40px;
+        
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .head{
+        padding: 20px;
+        padding-bottom: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .line{
+        width: 100px;
+        background: var(--primary-color);
+        height: 1.5px;
+    }
+    select{
+        outline: none !important;
+    }
+    label{
+        color: var(--primary-color);
+        font-size: 1.1rem;
+    }
+    input[type="submit"]{
+        padding: 0px 8px;
+        background: white;
+        color:  var( --border-color);
+        border: 1px solid var(--primary-color);
+        transition: 0.4s;
+    }
+    input[type="submit"]:hover{
+        transform: scale(1.1);
+    }
+    textarea{
+        width: 100%;
+        outline: none !important;
+    }
+    input{
+        outline:  none !important;
+    }
+
+    .content{
+         min-height: 100vh;
+      
+    }
+    
+</style>
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="main-section">
+<div class="head">
+    <h2>Share your Events, Eco Incidents or New Ideas</h2>
+    <div class="line"></div>
+</div>
+<div class="insertsection">
+        <label for="table_select">Choose </label>
+        <select id="table_select" name="table">
+            <option>Select</option>
+            <option value="events">Event</option>
+            <option value="eco_incidents">Eco Incident</option>
+            <option value="ideas">New Idea</option>
+        </select>
+        <div id="event_fields" class="p-3" style="display:none;">
+            <form action="/eventinsert" method="post" >
+                <label for="title">Title:</label><br>
+                <input type="text" id="title" name="title" required><br><br>
+                <label for="description">Description:</label><br>
+                <textarea id="description" name="description" rows="4" required></textarea><br><br>
+                <label for="event_type">Event Type:</label><br>
+                <input type="text" id="event_type" name="event_type"><br><br>
+                <label for="event_start">Event Start:</label><br>
+                <input type="datetime-local" id="event_start" name="event_start"><br><br>
+                <label for="event_end">Event End:</label><br>
+                <input type="text" id="event_end" name="event_end"><br><br>
+                <label for="location">Location:</label><br>
+                <input type="text" id="location" name="location"><br><br>
+                <input type="submit" value="Share">
+        </form>
+        </div>
+        
+        <div id="eco_incident_fields" class="p-3" style="display:none;">
+            <form action="/incidentinsert" method="post">
+            <label for="title">Title:</label><br>
+            <input type="text" id="title" name="title" required><br><br>
+            <label for="description">Description:</label><br>
+            <textarea id="description" name="description" rows="4" required></textarea><br><br>
+            <label for="location_incident">Location:</label><br>
+            <input type="text" id="location_incident" name="location"><br><br>
+            <label for="media_url">Media URL:</label><br>
+            <input type="text" id="media_url" name="media_url"><br><br>
+            <input type="submit" value="Share">
+        </form>
+        </div>
+        
+        <div id="idea_fields" class="p-3" style="display:none;">
+            <form action="/ideainsert" method="post">
+            <label for="title">Title:</label><br>
+            <input type="text" id="title" name="title" required><br><br>
+            <label for="description">Description:</label><br>
+            <textarea id="description" name="description" rows="4" required></textarea><br><br>
+            <label for="category">Category:</label><br>
+            <input type="text" id="category" name="category"><br><br>
+            <label for="status">Status:</label><br>
+            <input type="text" id="status" name="status"><br><br>
+            <input type="submit" value="Share">
+        </form>
+        </div>
+ 
+</div>
+</main>
+    <script>
+        document.getElementById('table_select').addEventListener('change', function() {
+            var table = this.value;
+            document.getElementById('event_fields').style.display = (table === 'events') ? 'block' : 'none';
+            document.getElementById('eco_incident_fields').style.display = (table === 'eco_incidents') ? 'block' : 'none';
+            document.getElementById('idea_fields').style.display = (table === 'ideas') ? 'block' : 'none';
+            
+            var submitButton = document.querySelector('input[type="submit"]');
+            switch (table) {
+                case 'events':
+                    submitButton.value = 'Share Event';
+                    break;
+                case 'eco_incidents':
+                    submitButton.value = 'Share Eco Incident';
+                    break;
+                case 'ideas':
+                    submitButton.value = 'Share New Idea';
+                    break;
+                default:
+                    submitButton.value = 'Share';
+                    break;
+            }
+        });
+    </script>
+
+
+{% endblock %}
