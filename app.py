@@ -236,6 +236,115 @@ def commontipsarticles(id):
         con.close()
         return render('commonarticle.html',name=appname,info=detail,article=article)
 
+@app.route('/personalized-tips')
+def personalized_tips():
+    if 'email' in session:
+        email = session['email']
+        detail=db.fetch_all_detail(email)
+        con = mysql.connection.cursor()
+        
+        # Fetch user details
+        sql = "SELECT * FROM users WHERE email = %s"
+        con.execute(sql, (email,))
+        user = con.fetchone()
+
+        # Fetch articles based on user preferences
+        preferences = [
+            ('energy_reduction', user['energy_reduction']),
+            ('sustainable_transport', user['sustainable_transport']),
+            ('recycle_frequency', user['recycle_frequency']),
+            ('composting_interest', user['composting_interest']),
+            ('local_organic_food', user['local_organic_food']),
+            ('diet_restrictions', user['diet_restrictions']),
+            ('home_ownership', user['home_ownership']),
+            ('water_reduction_interest', user['water_reduction_interest']),
+            ('purchase_impact', user['purchase_impact'])
+        ]
+        
+        tips_by_category = {}
+        for preference, value in preferences:
+            if value in ['yes', 'always', 'sometimes', True, 'vegan', 'vegetarian', 'own']:
+                sql = """
+                SELECT a.category, a.title, a.content,a.description,a.id
+                FROM articles2 a
+                JOIN user_preferences_articles upa ON a.id = upa.article_id
+                WHERE upa.preference = %s
+                """
+                con.execute(sql, (preference,))
+                articles = con.fetchall()
+                
+                for article in articles:
+                    category = article['category']
+                    if category not in tips_by_category:
+                        tips_by_category[category] = []
+                    tips_by_category[category].append({
+                        'id': article['id'],
+                        'title': article['title'],
+                        'content': article['content'],
+                        'description': article['description']
+                    })
+        
+        con.close()
+        
+        return render('personalized_tips.html',name=appname, info=detail, tips_by_category=tips_by_category)
+    else:
+        return redirect(url_for('login'))
+    
+
+@app.route('/personalized-tips/<string:id>')
+def personalized_tips_article(id):
+    if 'email' in session:
+        email = session['email']
+        detail=db.fetch_all_detail(email)
+        con = mysql.connection.cursor()
+        
+        # Fetch user details
+        sql = "SELECT * FROM users WHERE email = %s"
+        con.execute(sql, (email,))
+        user = con.fetchone()
+
+        # Fetch articles based on user preferences
+        preferences = [
+            ('energy_reduction', user['energy_reduction']),
+            ('sustainable_transport', user['sustainable_transport']),
+            ('recycle_frequency', user['recycle_frequency']),
+            ('composting_interest', user['composting_interest']),
+            ('local_organic_food', user['local_organic_food']),
+            ('diet_restrictions', user['diet_restrictions']),
+            ('home_ownership', user['home_ownership']),
+            ('water_reduction_interest', user['water_reduction_interest']),
+            ('purchase_impact', user['purchase_impact'])
+        ]
+        
+        tips_by_category = {}
+        for preference, value in preferences:
+            if value in ['yes', 'always', 'sometimes', True, 'vegan', 'vegetarian', 'own']:
+                sql = """
+                SELECT a.category, a.title, a.content,a.description
+                FROM articles2 a
+                JOIN user_preferences_articles upa ON a.id = upa.article_id
+                WHERE upa.preference = %s and a.id=%s
+                """
+                con.execute(sql, (preference,id))
+                articles = con.fetchall()
+                
+                for article in articles:
+                    category = article['category']
+                    if category not in tips_by_category:
+                        tips_by_category[category] = []
+                    tips_by_category[category].append({
+                        'title': article['title'],
+                        'content': article['content'],
+                        'description': article['description']
+                    })
+        
+        con.close()
+        
+        return render('personalized_tips_article.html',name=appname, info=detail, tips_by_category=tips_by_category)
+    else:
+        return redirect(url_for('login'))
+
+
 @app.route('/personalinfoupdate', methods=["GET", "POST"])
 def personalinfoupdate():
     if 'email' in session:

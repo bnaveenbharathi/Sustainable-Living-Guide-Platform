@@ -1,0 +1,69 @@
+<title>Personalized Tips for {{ info.name }}</title>
+<style>
+.tips-content{
+    padding: 30px;
+}
+.head{
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ padding: 30px;
+}  
+.line{
+ background: var(--primary-color);
+ height: 1.3px;
+ width: 100px;
+}
+.catergory{
+    padding: 10px;
+    padding-bottom: 5%;
+}
+.in-content{
+    padding: 10px;
+    padding-bottom: 3%;
+    box-shadow: 0px 2px 3px rgba(0,0,0,0.3);
+    margin: 2%;
+    transition: 0.5s;
+}
+.in-content:hover{
+    transform: scale(1.06);
+}
+.in-content button{
+    padding: 3px 10px;
+   border: 1px solid var(--primary-color);
+   border-radius: 3px;
+   color: black;
+   background: var(  --secondary-color);
+   transition: 0.3s;
+}
+.in-content button:hover{
+    transform: scale(1.05);
+}
+</style>
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="tips-content">
+    <div class="head">
+        <h1>Personalized Tips from {{ name }}</h1>
+        <div class="line"></div>
+    </div>
+
+    {% for category, tips in tips_by_category.items() %}
+       <div class="catergory">
+        <h2>{{ category }}</h2>
+        <div class="line"></div>
+       </div>
+         
+            {% for tip in tips %}
+             <div class="in-content">
+                    <h4>{{ tip.title }}</h4><br>
+                    <p>{{ tip.description[:200] +'...'}}</p>
+                    <a href="{{url_for('personalized_tips_article',id=tip.id)}}"><button>Read More</button></a>
+             </div>
+            {% endfor %}
+
+    {% endfor %}
+</div>
+{% endblock %}

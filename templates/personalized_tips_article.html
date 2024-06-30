@@ -1,0 +1,59 @@
+{% for category, tips in tips_by_category.items() %}
+{% for tip in tips %}
+<title>{{ tip.title }}</title>
+{% endfor %}
+{% endfor %}
+<style>
+    .tips-content{
+        padding: 30px;
+    }
+.head{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    padding-bottom: 20px;
+}
+.line{
+    background: var(--primary-color);
+    height: 1.3px;
+    width: 60px;
+}
+.in-content button{
+    padding: 3px 10px;
+   border: 1px solid var(--primary-color);
+   border-radius: 3px;
+   color: black;
+   background: var(  --secondary-color);
+   transition: 0.3s;
+}
+.in-content button:hover{
+    transform: scale(1.05);
+}
+</style>
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="tips-content">
+    <div class="head">
+        <h1>Article</h1>
+        <div class="line"></div>
+    </div>
+
+    {% for category, tips in tips_by_category.items() %}
+         
+            {% for tip in tips %}
+             <div class="in-content">
+                    <h1>{{ tip.title }}</h1><br>
+                    <p>{{ tip.content | safe }}</p>
+                    <a href="{{url_for('personalized_tips')}}"><button>Back</button></a>
+                    
+             </div>
+            {% endfor %}
+
+    {% endfor %}
+</div>
+
+{% endblock %}
+
