@@ -1,0 +1,59 @@
+<title>Calculation Result | {{name}}</title>
+<style>
+    .content{
+        min-height: 100vh;
+    }
+    .content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        text-align: center;
+    }
+
+    .innercontent {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width: 80%;
+        max-width: 600px;
+    }
+
+    h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .alert {
+        background-color: #f8d7da;
+        color: #721c24;
+        padding: 10px;
+        border-radius: 4px;
+        margin-bottom: 20px;
+    }
+
+    a {
+        display: inline-block;
+        text-decoration: none;
+        color: #0077be;
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+</style>
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="innercontent">
+<h2>Your estimated carbon footprint is {{ footprint }} kg CO2e per period.</h2>
+{% if footprint > 500 %}
+<div class="alert">Your carbon footprint is high! Consider reducing your emissions.</div>
+{% endif %}
+<a href="{{url_for('carboncalculator')}}">Calculate again</a>
+<a href="/footprint_history">View History</a>
+</div>
+{% endblock %}
