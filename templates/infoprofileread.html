@@ -1,8 +1,115 @@
 <title>Settings | {{name}}</title>
-
-<link rel="stylesheet" href="{{url_for('static',filename='css/settings.css')}}">
-<link rel="stylesheet" href="{{url_for('static',filename='css/personalinfo.css')}}">
-
+<style>
+    .account-contain #infor {
+        padding:10px ;
+    }
+    #infor button{
+        background: var(--accent-color);
+        border: none !important;
+        border-radius: 3px;
+        box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
+    }
+    #infor p{
+        padding: 10px;
+    }
+    .submitbtn{
+        padding: 10px;
+    }
+    #submitbtn{
+        color: var(--primary-color);
+        background: var( --hover-color);
+        border: 1px solid var(--primary-color);
+        transition: all 0.3s;
+        box-shadow: 0px 3px 5px  rgba(0,0,0,0.3);
+    
+    }
+    #submitbtn:hover{
+        transform: scale(1.1);
+        box-shadow: 0px 5px 7px  rgba(0,0,0,0.3);
+    }
+    input{
+        outline: none !important;
+        border:  1px solid var( --border-color);
+    }
+    .grid-container{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        gap: 10px;
+        padding: 10px;
+    }
+    aside{
+        grid-column: span 1;
+        padding: 20px;
+        border-right: 2px solid var(--primary-color);
+        width: 80%;
+       
+    }
+    
+    ol li {
+        padding: 10px;
+        list-style: square;
+        color: chocolate ;
+        transition: 0.3s;
+    
+    }
+    ol li:hover{
+        box-shadow: 0px 1px 3px rgba(0,0,0,0.3);
+        border-radius: 3px;
+    }
+    ol li a{
+        color: var(--border-color) !important;
+    }
+    .account-contain{
+        grid-column:  2 / span 3;
+        padding: 20px;
+        width: 100%;
+    }
+    .account-contain section{
+        padding: 10px;
+    }
+    table tr td{
+        padding: 8px;
+    }
+    .tabrow td{
+        padding: 10px;
+    }
+    .actionsection{
+        padding: 15px;
+    }
+    .actionsection button{
+        padding: 5px;
+        min-width: 20%;
+        max-width: 40%;
+        background: var(--primary-color);
+        color: var(   --background-color);
+        border: 1px solid var(    --hover-color);
+        box-shadow: 0px 2px 3px rgba(0,0,0,0.3);
+        border-radius: 3px;
+        transition: 0.5s;
+    }
+    .actionsection button:hover{
+        transform: scale(1.1);
+    }
+    .head li h2{
+     color: black;
+    }
+    .head li{
+        box-shadow: none !important;
+    }
+    @media screen and (max-width:480px) {
+        .grid-container{
+            display: block;
+        }
+       aside{
+        border-right: 0px;
+        border-bottom: 2px solid var(--primary-color);
+    
+        grid-column: span 2;
+    
+       }
+        
+    }
+</style>
 {% extends 'base.html' %}
 
 

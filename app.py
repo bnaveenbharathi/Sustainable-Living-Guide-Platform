@@ -1,7 +1,7 @@
-import MySQLdb
 from flask import Flask, render_template as render, redirect, url_for, request, session
 from flask_mysqldb import MySQL
 from flask_bcrypt import Bcrypt
+from datetime import datetime
 # Database fetch
 class Database:
     def __init__(self, mysql):
@@ -191,14 +191,51 @@ def recyclecenters():
     else:
         return redirect(url_for('login'))
 
-@app.route('/carboncalculator')
+@app.route('/carboncalculator',methods=["GET","POST"])
 def carboncalculator():
     if 'email' in session:
         email = session['email']
         detail = db.fetch_all_detail(email)
+        user_id=detail['id']
+        if request.method=="POST":
+            electricity = float(request.form['electricity'])
+            gas = float(request.form['gas'])
+            mileage = float(request.form['mileage'])
+            flight = float(request.form['flight'])
+            #default value
+            electricity_emission_factor = 0.82
+            gas_emission_factor = 2.93
+            mileage_emission_factor = 0.180
+            flight_emission_factor = 190
+            #calculation
+            total_footprint = (electricity * electricity_emission_factor +
+                               gas * gas_emission_factor +
+                               mileage * mileage_emission_factor +
+                               flight * flight_emission_factor)
+            calculation_date = datetime.now()
+            con=mysql.connection.cursor()
+            sql="""INSERT INTO carbon_footprints (user_id, electricity_usage, gas_usage, mileage, flight_hours, total_footprint, calculation_date)
+                   VALUES (%s, %s, %s, %s, %s, %s, %s)"""
+            con.execute(sql,(user_id, electricity, gas, mileage, flight, total_footprint, calculation_date))
+            mysql.connection.commit()
+            con.close()
+            return render('carbonfootprintresult.html',footprint=total_footprint,name=appname,info=detail)
         return render('carbonfootprint.html', name=appname, info=detail)
     else:
         return redirect(url_for('login'))
+    
+@app.route('/footprint_history')
+def footprint_history():
+    if 'email' in session:
+        email=session['email']
+        detail=db.fetch_all_detail(email)
+        user_id=detail['id']
+        con=mysql.connection.cursor()
+        con.execute("SELECT * FROM carbon_footprints WHERE user_id = %s", (user_id,))
+        footprints=con.fetchall()
+        con.close()
+        return render('carbonfootprinthistory.html', footprints=footprints,info=detail,name=appname)
+    return redirect(url_for('login'))
     
 
 #tipssection routes
@@ -237,6 +274,7 @@ def commontipsarticles(id):
         con.close()
         return render('commonarticle.html',name=appname,info=detail,article=article)
 
+#personalize tips logic
 @app.route('/personalized-tips')
 def personalized_tips():
     if 'email' in session:
@@ -387,6 +425,8 @@ def personalinfoupdate():
         return render('infoprofile.html', name=appname, info=detail)
     else:
         return redirect(url_for('login'))
+
+#view the personalinfo
 @app.route('/personalinfo')
 def personalinfo():
     if 'email' in session:
@@ -396,6 +436,7 @@ def personalinfo():
     else:
         return redirect(url_for('login'))
 
+#insert the personal information
 @app.route('/personalinfoinsert', methods=["GET", "POST"])
 def personalinfoinsert():
     if request.method == 'POST':
@@ -463,7 +504,7 @@ def personalinfoinsert():
         return render('infoprofileinsert.html', name=appname)
 
     
-
+#delete personal information
 @app.route('/deleteinfor')
 def deleteinfo():
     if 'email' in session:
@@ -510,7 +551,6 @@ def deleteinfo():
     return redirect(url_for('personalinfo'))
 
 #community section
-
 @app.route('/viewcommuntiy')
 def viewcommunity():
     if 'email' in session:
@@ -610,7 +650,7 @@ def ideainsert():
         return redirect(url_for('sharetocommunity'))
 
 
-
+#logout
 @app.route('/logout')
 def logout():
     session.pop('loggedin', None)

@@ -67,6 +67,14 @@
     .contentsection button:hover {
         transform: scale(1.03);
     }
+    @media screen and (max-width:480px) {
+       .section-1{
+        flex-wrap: wrap;
+        display: flex;
+        max-width: 880px;
+        margin: 0 auto;
+       }
+    }
 </style>
 {% extends 'base.html '%}
 {% block content %}
