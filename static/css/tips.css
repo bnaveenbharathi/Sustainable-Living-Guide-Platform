@@ -19,6 +19,10 @@
     border: 1px solid var(--primary-color);
     background: var( --link-color);
     border-radius: 2px;
+    transition: 0.3s
+}
+.acbtn button:hover{
+    transform: scale(1.09);
 }
 .line{
     background: var(--primary-color);

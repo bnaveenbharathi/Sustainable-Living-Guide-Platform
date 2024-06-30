@@ -1,0 +1,37 @@
+{% for article in article %}
+<title>{{article.title}}</title>
+{% endfor %}
+<style>
+.article-content{
+    padding: 30px;
+}
+.ar-content{
+    padding: 8px;
+    line-height: 2;
+    color: #454545;
+}
+textarea{
+    border: none !important;
+    outline:  none !important;
+}
+</style>
+{% extends 'base.html' %}
+{% block content %}
+
+{% for article in article %}
+
+<div class="article-content">
+    <h2>{{article.title}}</h2>
+
+    <div class="img-content">
+        <img src="" alt="">
+    </div>
+    <div class="ar-content">
+     {{article.content | safe}}    
+    </div>
+</div>
+
+{%endfor%}
+
+
+{% endblock %}

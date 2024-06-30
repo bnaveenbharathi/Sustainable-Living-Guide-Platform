@@ -228,7 +228,13 @@ def commontipsarticles(id):
     if 'email' in session:
         email=session['email']
         detail=db.fetch_all_detail(email)
-        return render('commonarticle.html',name=appname,info=detail)
+        con=mysql.connection.cursor()
+        sql="SELECT * from articles1 where id=%s"
+        con.execute(sql,(id,))
+        article=con.fetchall()
+        mysql.connection.commit()
+        con.close()
+        return render('commonarticle.html',name=appname,info=detail,article=article)
 
 @app.route('/personalinfoupdate', methods=["GET", "POST"])
 def personalinfoupdate():
