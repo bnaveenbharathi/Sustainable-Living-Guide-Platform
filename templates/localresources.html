@@ -1,0 +1,115 @@
+<title>Local Resources | {{name}}</title>
+<style>
+    main {
+        padding: 20px;
+        padding-top: 3%;
+    }
+
+    .title {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .title h2 {
+        font-size: 3.3rem;
+    }
+
+    .line {
+        background: var(--primary-color);
+        height: 1.5px;
+        width: 10rem;
+    }
+
+    .section-1 {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+        display: flex;
+        padding: 30px;
+        flex-direction: row;
+        box-shadow: 0px 2px 2px rgba(21, 58, 0, 0.3);
+        margin: 2rem;
+    }
+
+    .contentsection {
+        width: 100%;
+    }
+
+    .contentsection p {
+        padding: 10px;
+        text-align: justify;
+    }
+
+    .imgsection {
+        padding: 20px;
+
+    }
+
+    .imgsection img {
+        border: 4px solid white;
+        box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.3);
+        transition: 0.4s;
+    }
+    .imgsection img:hover{
+        transform: scale(1.02);
+    }
+
+
+    .contentsection button {
+        padding: 5px 10px;
+        border: 1px solid var(--primary-color);
+        background: var(--button-color);
+        border-radius: 3px;
+        transition: 0.3s;
+    }
+
+    .contentsection button:hover {
+        transform: scale(1.03);
+    }
+</style>
+{% extends 'base.html '%}
+{% block content %}
+
+<main>
+    <div class="title">
+        <h2>Local Resources</h2>
+        <div class="line"></div>
+    </div>
+    <section class="section-1">
+        <div class="contentsection">
+            <h2>Recycel Centers</h2>
+            <p>Recycling centers play a crucial role in sustainable waste management by providing dedicated facilities
+                for collecting and processing recyclable materials. These centers serve as pivotal points where
+                individuals and businesses can drop off items like paper, plastic, glass, and metal, ensuring these
+                materials are diverted from landfills and reused in manufacturing processes. By promoting recycling,
+                these centers contribute significantly to reducing environmental impact, conserving natural resources,
+                and fostering a circular economy. They also educate communities on proper waste sorting and disposal
+                practices to maximize recycling efficiency.</p>
+            <a href="{{url_for('recyclecenters')}}"><button>Find the Recycle Centers</button></a>
+        </div>
+        <div class="imgsection">
+            <img src="{{url_for('static',filename='img/recycle_centers.jpg')}}" alt="" width="100%">
+        </div>
+    </section>
+    <section class="section-1">
+        <div class="contentsection">
+            <h2>Carbon Footprint</h2>
+            <p>A carbon footprint measures the total greenhouse gas emissions caused directly and indirectly by human
+                activities, typically expressed in equivalent tons of carbon dioxide (CO2). It encompasses emissions
+                from personal, organizational, or product-related activities, including energy consumption,
+                transportation, waste generation, and more. Understanding and reducing one's carbon footprint is crucial
+                for mitigating climate change impacts, promoting sustainable practices, and achieving environmental
+                goals. By calculating and minimizing emissions, individuals and organizations can contribute to a
+                healthier planet and a more sustainable future.</p>
+                <a href="{{url_for('carboncalculator')}}"><button>Check your Carbon Footprint</button></a>
+        </div>
+        <div class="imgsection">
+            <img src="{{url_for('static',filename='img/carboonfootprint.jpg')}}" alt="" width="100%" height="380px">
+        </div>
+    </section>
+</main>
+
+
+
+{% endblock %}
