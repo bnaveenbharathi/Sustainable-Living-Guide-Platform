@@ -18,9 +18,7 @@ EcoX is a comprehensive platform designed to guide users towards a more sustaina
 
 ```bash
 
-pip install Flask
-pip install Flask-MySQLdb
-pip install Flask-Bcrypt
+pip install -m requirements.txt
 
 ```
 
